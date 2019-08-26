@@ -1,0 +1,337 @@
+student@csadmin-HCL-Infosystems-Limited-BIOS-For-GA-G31M-ES2L ~/Desktop $ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.7.11-0ubuntu6 (Ubuntu)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| 4MH17CS091         |
+| 5ainternal         |
+| LIKITH             |
+| PEACE_BRO          |
+| customer           |
+| emp                |
+| mit                |
+| mitm               |
+| movies             |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| rakesh             |
+| student            |
+| student1           |
+| sys                |
++--------------------+
+17 rows in set (0.00 sec)
+
+mysql> use 4MH17CS091;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select dept,count(*) from emp where salary>25000 group by dept having count(*)>1;
++---------+----------+
+| dept    | count(*) |
++---------+----------+
+| HR      |        2 |
+| testing |        2 |
++---------+----------+
+2 rows in set (0.00 sec)
+
+mysql> create table stud(USN  varchar(10) primary key,name varchar(10),sem int,sec char(1),branch varchar(10));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc stud;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| USN    | varchar(10) | NO   | PRI | NULL    |       |
+| name   | varchar(10) | YES  |     | NULL    |       |
+| sem    | int(11)     | YES  |     | NULL    |       |
+| sec    | char(1)     | YES  |     | NULL    |       |
+| branch | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into stud values(111,'anu',5,'c','cse');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into stud values(222,'hari',5,'b','cse');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into stud values(333,'raghav',5,'b','ise');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into stud values(444,'jayanth',5,'a','ise');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into stud values(555,'yash',3,'a','ise');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from stud;
++-----+---------+------+------+--------+
+| USN | name    | sem  | sec  | branch |
++-----+---------+------+------+--------+
+| 111 | anu     |    5 | c    | cse    |
+| 222 | hari    |    5 | b    | cse    |
+| 333 | raghav  |    5 | b    | ise    |
+| 444 | jayanth |    5 | a    | ise    |
+| 555 | yash    |    3 | a    | ise    |
++-----+---------+------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update stud set sec='b' where USN=444;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from stud;
++-----+---------+------+------+--------+
+| USN | name    | sem  | sec  | branch |
++-----+---------+------+------+--------+
+| 111 | anu     |    5 | c    | cse    |
+| 222 | hari    |    5 | b    | cse    |
+| 333 | raghav  |    5 | b    | ise    |
+| 444 | jayanth |    5 | b    | ise    |
+| 555 | yash    |    3 | a    | ise    |
++-----+---------+------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update stud set name='y' where USN=444;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update stud set name='jayanth' where USN=555;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update stud set name='yash' where USN=444;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from stud;
++-----+---------+------+------+--------+
+| USN | name    | sem  | sec  | branch |
++-----+---------+------+------+--------+
+| 111 | anu     |    5 | c    | cse    |
+| 222 | hari    |    5 | b    | cse    |
+| 333 | raghav  |    5 | b    | ise    |
+| 444 | yash    |    5 | b    | ise    |
+| 555 | jayanth |    3 | a    | ise    |
++-----+---------+------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update stud set branch='cse' where USN=333;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from stud;
++-----+---------+------+------+--------+
+| USN | name    | sem  | sec  | branch |
++-----+---------+------+------+--------+
+| 111 | anu     |    5 | c    | cse    |
+| 222 | hari    |    5 | b    | cse    |
+| 333 | raghav  |    5 | b    | cse    |
+| 444 | yash    |    5 | b    | ise    |
+| 555 | jayanth |    3 | a    | ise    |
++-----+---------+------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update stud set sem=7 where USN=444;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from stud;
++-----+---------+------+------+--------+
+| USN | name    | sem  | sec  | branch |
++-----+---------+------+------+--------+
+| 111 | anu     |    5 | c    | cse    |
+| 222 | hari    |    5 | b    | cse    |
+| 333 | raghav  |    5 | b    | cse    |
+| 444 | yash    |    7 | b    | ise    |
+| 555 | jayanth |    3 | a    | ise    |
++-----+---------+------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> create table acc(recno int primary,fee int,USN int,foreign key(USN) references stud(USN));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'fee int,USN int,foreign key(USN) references stud(USN))' at line 1
+mysql> create table acc(recno int primary key,fee int,USN int,foreign key(USN) references stud(USN));
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> create table acc(recno int primary key,fee int,USN int,foreign key(USN) references stud(USN));
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> create table acc(recno int primary key,fee int,USN int,foreign key(USN) references stud(USN));
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> create table acc(recno int primary key,fee int,USN int,
+    -> foreign key(USN) references stud(USN));
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> create table accounts(recno int primary key,fee int,USN int,
+    -> foreign key(USN) references stud(USN));
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> create table accounts(recno int primary key,fee int,usn int,
+    -> foreign key(usn) references stud(usn));
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> create table accounts(recno int primary key,fee int,usn int,
+    -> foreign key(usn) references stud(USN));
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> alter table stud change USN usn int(11)'
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''
+'' at line 1
+mysql> alter table stud change USN usn int(11);
+Query OK, 5 rows affected (0.05 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc stud;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| usn    | int(11)     | NO   | PRI | NULL    |       |
+| name   | varchar(10) | YES  |     | NULL    |       |
+| sem    | int(11)     | YES  |     | NULL    |       |
+| sec    | char(1)     | YES  |     | NULL    |       |
+| branch | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from stud;
++-----+---------+------+------+--------+
+| usn | name    | sem  | sec  | branch |
++-----+---------+------+------+--------+
+| 111 | anu     |    5 | c    | cse    |
+| 222 | hari    |    5 | b    | cse    |
+| 333 | raghav  |    5 | b    | cse    |
+| 444 | yash    |    7 | b    | ise    |
+| 555 | jayanth |    3 | a    | ise    |
++-----+---------+------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> create table accounts(recno int primary key,fee int,usn int,          -> foreign key(usn) references stud(USN));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc accounts;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| recno | int(11) | NO   | PRI | NULL    |       |
+| fee   | int(11) | YES  |     | NULL    |       |
+| usn   | int(11) | YES  | MUL | NULL    |       |
++-------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table account(recno int primary key,fee int,usn int,
+    -> foreign key(usn) references stud(usn));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc account;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| recno | int(11) | NO   | PRI | NULL    |       |
+| fee   | int(11) | YES  |     | NULL    |       |
+| usn   | int(11) | YES  | MUL | NULL    |       |
++-------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into account values(9000,80000,111);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into account values(9001,30000,222);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into account values(9022,30000,222);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into account values(9032,30000,333);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into account values(9033,60000,444);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into account values(9035,80000,555);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into account values(9038,10000,555);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into account values(9099,20999,444);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from account;
++-------+-------+------+
+| recno | fee   | usn  |
++-------+-------+------+
+|  9000 | 80000 |  111 |
+|  9001 | 30000 |  222 |
+|  9022 | 30000 |  222 |
+|  9032 | 30000 |  333 |
+|  9033 | 60000 |  444 |
+|  9035 | 80000 |  555 |
+|  9038 | 10000 |  555 |
+|  9099 | 20999 |  444 |
++-------+-------+------+
+8 rows in set (0.00 sec)
+
+mysql> select fee
+    -> from stud,account
+    -> where name='jayanth';
++-------+
+| fee   |
++-------+
+| 80000 |
+| 30000 |
+| 30000 |
+| 30000 |
+| 60000 |
+| 80000 |
+| 10000 |
+| 20999 |
++-------+
+8 rows in set (0.00 sec)
+
+mysql> select recno,fee from stud,acc where name='jayanth';
+ERROR 1146 (42S02): Table '4MH17CS091.acc' doesn't exist
+mysql> select recno,fee from stud,account where name='jayanth';
++-------+-------+
+| recno | fee   |
++-------+-------+
+|  9000 | 80000 |
+|  9001 | 30000 |
+|  9022 | 30000 |
+|  9032 | 30000 |
+|  9033 | 60000 |
+|  9035 | 80000 |
+|  9038 | 10000 |
+|  9099 | 20999 |
++-------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select recno,fee from stud,account where name='jayanth' and stud.usn=account.usn;
++-------+-------+
+| recno | fee   |
++-------+-------+
+|  9035 | 80000 |
+|  9038 | 10000 |
++-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select recno,fee from stud,account where name='jayanth' and s.usn=a.usn;
+ERROR 1054 (42S22): Unknown column 's.usn' in 'where clause'
+mysql> select recno,fee from stud s,account a where name='jayanth' and s.usn=a.usn;
++-------+-------+
+| recno | fee   |
++-------+-------+
+|  9035 | 80000 |
+|  9038 | 10000 |
++-------+-------+
+2 rows in set (0.00 sec)
